@@ -24,8 +24,13 @@ public class ChatController {
     OllamaChatOptions options =
         OllamaChatOptions.builder().toolCallbacks(ToolCallbacks.from(new ToolService())).build();
 
-    Prompt prompt = new Prompt("What's the current time?", options);
+    Prompt prompt =
+        new Prompt(
+            "What's the current time? (Don't set an alarm.) Answer short and with emojis.",
+            options);
     ChatResponse response = this.chatModel.call(prompt);
+    int counter = 0;
+    System.out.println(++counter + ": " + response);
 
     ToolCallingManager toolCallingManager = ToolCallingManager.builder().build();
 
@@ -33,8 +38,9 @@ public class ChatController {
       ToolExecutionResult result = toolCallingManager.executeToolCalls(prompt, response);
       prompt = new Prompt(result.conversationHistory(), options);
       response = this.chatModel.call(prompt);
+      System.out.println(++counter + ": " + response);
     }
 
-    System.out.println(response);
+    System.out.println(response.getResult().getOutput().getText());
   }
 }
