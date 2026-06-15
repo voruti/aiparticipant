@@ -1,5 +1,6 @@
 package de.redno.aiparticipant;
 
+import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,9 +14,12 @@ public class AiparticipantApplication {
   }
 
   @Bean
-  public CommandLineRunner run(ChatController chatController) {
-    return args -> {
-      chatController.logic();
-    };
+  public CommandLineRunner run(AiService aiService) {
+    return _ ->
+        aiService.handle(
+            new UserMessage("A: Hi"),
+            new UserMessage("B: Hi, how are you?"),
+            new UserMessage("A: Fine."),
+            new UserMessage("C: Hi, im also doing fine"));
   }
 }
