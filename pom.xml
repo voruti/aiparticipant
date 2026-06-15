@@ -79,6 +79,25 @@
       <artifactId>jspecify</artifactId>
       <version>1.0.0</version>
     </dependency>
+
+    <dependency>
+      <groupId>net.dv8tion</groupId>
+      <artifactId>JDA</artifactId>
+      <version>6.4.2</version>
+
+      <exclusions>
+        <!-- required for encoding audio into opus -->
+        <exclusion>
+          <groupId>club.minnced</groupId>
+          <artifactId>opus-java</artifactId>
+        </exclusion>
+        <!-- required for encrypting and decrypting audio -->
+        <exclusion>
+          <groupId>com.google.crypto.tink</groupId>
+          <artifactId>tink</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
   </dependencies>
 
   <build>
