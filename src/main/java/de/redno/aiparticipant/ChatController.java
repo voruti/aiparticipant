@@ -8,12 +8,16 @@ import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.ai.ollama.api.OllamaChatOptions;
 import org.springframework.ai.support.ToolCallbacks;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ChatController {
 
   private final OllamaChatModel chatModel;
+
+  @Value("${spring.ai.ollama.chat.model:mistral}")
+  private String model;
 
   @Autowired
   public ChatController(OllamaChatModel chatModel) {
@@ -22,7 +26,10 @@ public class ChatController {
 
   public void logic() {
     OllamaChatOptions options =
-        OllamaChatOptions.builder().toolCallbacks(ToolCallbacks.from(new ToolService())).build();
+        OllamaChatOptions.builder()
+            .model(model)
+            .toolCallbacks(ToolCallbacks.from(new ToolService()))
+            .build();
 
     Prompt prompt =
         new Prompt(
