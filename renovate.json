@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "See all configuration options at https://docs.renovatebot.com/configuration-options/. Use :pinVersions only when your project isn't used by other projects, see https://docs.renovatebot.com/dependency-pinning/#so-whats-best.",
+
+  "extends": ["config:best-practices", ":pinVersions"],
+
+  "osvVulnerabilityAlerts": true,
+
+  "packageRules": [
+    {
+      "description": "Don't upgrade nixpkgs inputs that are locked to specific releases intentionally.",
+      "matchDepNames": ["/nixpkgs-\\d{4}/"],
+      "matchUpdateTypes": ["major", "minor"],
+      "enabled": false
+    }
+  ]
+}
