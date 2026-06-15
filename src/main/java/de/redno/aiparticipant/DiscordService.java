@@ -23,6 +23,9 @@ public class DiscordService extends ListenerAdapter {
 
   private final AiService aiService;
 
+  @Value("${discord.message_history_size:20}")
+  private int messageHistorySize;
+
   @Autowired
   public DiscordService(AiService aiService, @Value("${discord.bot_token}") String botToken) {
     this.aiService = aiService;
@@ -47,7 +50,7 @@ public class DiscordService extends ListenerAdapter {
     final MessageChannel channel = event.getChannel();
 
     channel
-        .getHistoryBefore(message, 20)
+        .getHistoryBefore(message, this.messageHistorySize)
         .queue(
             messages -> {
               DiscordService.channel = channel;
