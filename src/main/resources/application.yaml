@@ -1,3 +1,9 @@
 spring:
   application:
     name: aiparticipant
+
+# management:
+#   endpoints:
+#     web:
+#       exposure:
+#         include: "*"
