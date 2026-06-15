@@ -7,6 +7,7 @@ public class Tools {
   @Tool(description = "Send your answer into the chat.", returnDirect = true)
   public static void sendAnswer(final String message) {
     System.out.println("AI is answering: " + message);
+    DiscordService.sendMessage(message);
   }
 
   @Tool(
