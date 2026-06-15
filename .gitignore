@@ -36,3 +36,5 @@ build/
 /.direnv/
 result
 result-*
+
+/.env

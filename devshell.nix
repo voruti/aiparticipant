@@ -14,6 +14,8 @@ pkgs.mkShell {
   };
 
   shellHook = ''
+    [ -f .env ] && export $(grep -v '^#' .env | xargs)
+
     ${lib.getExe pkgs.git} config --local core.hooksPath "$(${lib.getExe pkgs.git} rev-parse --show-toplevel)/bin/hooks"
 
     ${lib.getExe pkgs.git} fetch --all --tags --prune || true
