@@ -7,7 +7,7 @@ RUN ./mvnw dependency:go-offline -B
 COPY src ./src
 RUN ./mvnw package -DskipTests
 
-FROM eclipse-temurin:25-jre-noble@sha256:b27ca47660a8fa837e47a8533b9b1a3a430295cf29ca28d91af4fd121572dc29
+FROM eclipse-temurin:25-jre-noble@sha256:fbcf915c585659b30eb766ada4d6d7cfc9ec1040bf521e95bf61b10a25af73db
 RUN addgroup --system spring && adduser --system spring --group
 USER spring:spring
 WORKDIR /app
